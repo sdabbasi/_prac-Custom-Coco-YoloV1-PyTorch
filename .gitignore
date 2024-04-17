@@ -1,0 +1,8 @@
+__pycache__/
+
+local_test.py
+local_test.ipynb
+
+data/images/train/*
+data/images/val/*
+data/images/visualization_test/*

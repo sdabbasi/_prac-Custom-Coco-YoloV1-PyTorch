@@ -1,0 +1,93 @@
+import torch
+from torch import nn
+
+
+
+
+class Yolo1(nn.Module):
+    def __init__(self, is_pretraining_phase=False):
+        super().__init__()
+
+        self.conv_layers = nn.Sequential(
+            nn.Conv2d(in_channels=3, out_channels=64, kernel_size=7, stride=2),
+            nn.BatchNorm2d(num_features=64),
+            nn.LeakyReLU(negative_slope=0.1, inplace=True),
+            nn.MaxPool2d(kernel_size=2),
+
+            nn.Conv2d(in_channels=64, out_channels=192, kernel_size=3, stride=1),
+            nn.BatchNorm2d(num_features=192),
+            nn.LeakyReLU(negative_slope=0.1, inplace=True),
+            nn.MaxPool2d(kernel_size=2),
+
+            nn.Conv2d(in_channels=192, out_channels=128, kernel_size=1, stride=1),
+            nn.BatchNorm2d(num_features=128),
+            nn.LeakyReLU(negative_slope=0.1, inplace=True),
+            nn.Conv2d(in_channels=128, out_channels=256, kernel_size=3, stride=1),
+            nn.BatchNorm2d(num_features=256),
+            nn.LeakyReLU(negative_slope=0.1, inplace=True),
+            nn.Conv2d(in_channels=256, out_channels=256, kernel_size=1, stride=1),
+            nn.BatchNorm2d(num_features=256),
+            nn.LeakyReLU(negative_slope=0.1, inplace=True),
+            nn.Conv2d(in_channels=256, out_channels=512, kernel_size=3, stride=1),
+            nn.BatchNorm2d(num_features=512),
+            nn.LeakyReLU(negative_slope=0.1, inplace=True),
+            nn.MaxPool2d(kernel_size=2),
+
+            nn.Conv2d(in_channels=512, out_channels=256, kernel_size=1, stride=1),
+            nn.BatchNorm2d(num_features=256),
+            nn.LeakyReLU(negative_slope=0.1, inplace=True),
+            nn.Conv2d(in_channels=256, out_channels=512, kernel_size=3, stride=1),
+            nn.BatchNorm2d(num_features=512),
+            nn.LeakyReLU(negative_slope=0.1, inplace=True),
+            nn.Conv2d(in_channels=512, out_channels=256, kernel_size=1, stride=1),
+            nn.BatchNorm2d(num_features=256),
+            nn.LeakyReLU(negative_slope=0.1, inplace=True),
+            nn.Conv2d(in_channels=256, out_channels=512, kernel_size=3, stride=1),
+            nn.BatchNorm2d(num_features=512),
+            nn.LeakyReLU(negative_slope=0.1, inplace=True),
+            nn.Conv2d(in_channels=512, out_channels=256, kernel_size=1, stride=1),
+            nn.BatchNorm2d(num_features=256),
+            nn.LeakyReLU(negative_slope=0.1, inplace=True),
+            nn.Conv2d(in_channels=256, out_channels=512, kernel_size=3, stride=1),
+            nn.BatchNorm2d(num_features=512),
+            nn.LeakyReLU(negative_slope=0.1, inplace=True),
+            nn.Conv2d(in_channels=512, out_channels=256, kernel_size=1, stride=1),
+            nn.BatchNorm2d(num_features=256),
+            nn.LeakyReLU(negative_slope=0.1, inplace=True),
+            nn.Conv2d(in_channels=256, out_channels=512, kernel_size=3, stride=1),
+            nn.BatchNorm2d(num_features=512),
+            nn.LeakyReLU(negative_slope=0.1, inplace=True),
+            nn.Conv2d(in_channels=512, out_channels=512, kernel_size=1, stride=1),
+            nn.BatchNorm2d(num_features=512),
+            nn.LeakyReLU(negative_slope=0.1, inplace=True),
+            nn.Conv2d(in_channels=512, out_channels=1024, kernel_size=3, stride=1),
+            nn.BatchNorm2d(num_features=1024),
+            nn.LeakyReLU(negative_slope=0.1, inplace=True),
+            nn.MaxPool2d(kernel_size=2),
+
+            nn.Conv2d(in_channels=1024, out_channels=512, kernel_size=1, stride=1),
+            nn.BatchNorm2d(num_features=512),
+            nn.LeakyReLU(negative_slope=0.1, inplace=True),
+            nn.Conv2d(in_channels=512, out_channels=1024, kernel_size=3, stride=1),
+            nn.BatchNorm2d(num_features=1024),
+            nn.LeakyReLU(negative_slope=0.1, inplace=True),
+            nn.Conv2d(in_channels=1024, out_channels=512, kernel_size=1, stride=1),
+            nn.BatchNorm2d(num_features=512),
+            nn.LeakyReLU(negative_slope=0.1, inplace=True),
+            nn.Conv2d(in_channels=512, out_channels=1024, kernel_size=3, stride=1),
+            nn.BatchNorm2d(num_features=1024),
+            nn.LeakyReLU(negative_slope=0.1, inplace=True),
+            nn.Conv2d(in_channels=1024, out_channels=1024, kernel_size=3, stride=1),
+            nn.BatchNorm2d(num_features=1024),
+            nn.LeakyReLU(negative_slope=0.1, inplace=True),
+            nn.Conv2d(in_channels=1024, out_channels=1024, kernel_size=3, stride=2),
+            nn.BatchNorm2d(num_features=1024),
+            nn.LeakyReLU(negative_slope=0.1, inplace=True),
+
+            nn.Conv2d(in_channels=1024, out_channels=1024, kernel_size=3, stride=1),
+            nn.BatchNorm2d(num_features=1024),
+            nn.LeakyReLU(negative_slope=0.1, inplace=True),
+            nn.Conv2d(in_channels=1024, out_channels=1024, kernel_size=3, stride=1),
+            nn.BatchNorm2d(num_features=1024),
+            nn.LeakyReLU(negative_slope=0.1, inplace=True),
+        )
